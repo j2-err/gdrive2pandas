@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="gdrive_conector",
+    name="gdrive2pandas",
     version="0.1.0",
     description="Conector a Google Drive y librerias para pasar a dataframes",
     author="Tu Nombre",
