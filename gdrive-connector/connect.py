@@ -4,22 +4,18 @@ from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 from pathlib import Path
 
-# Alcances de permisos (solo lectura de archivos de Drive)
+# Alcances de permisos (puedes personalizar)
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
-def conectar_drive(credentials_file='credentials.json', token_file='token.json'):
-    """Conecta a Google Drive usando archivos en la raíz del proyecto o ruta especificada.
+def conectar_drive():
+    """Conecta a Google Drive buscando archivos en la raíz del proyecto donde el usuario ejecuta el script."""
 
-    Args:
-        credentials_file (str): Nombre o ruta del archivo de credenciales.
-        token_file (str): Nombre o ruta del archivo del token.
-
-    Returns:
-        Google Drive service object.
-    """
     creds = None
-    credentials_path = Path(credentials_file)
-    token_path = Path(token_file)
+
+    # Buscar archivos en la carpeta donde el usuario ejecuta el código
+    base_path = Path.cwd()
+    credentials_path = base_path / 'credentials.json'
+    token_path = base_path / 'token.json'
 
     # Si ya existe un token de sesión previa, lo carga
     if token_path.exists():
